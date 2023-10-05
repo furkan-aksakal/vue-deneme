@@ -34,26 +34,17 @@
                     <v-card-text>
                         <v-container>
                             <v-row>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="First Name*" required></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Last Name*" hint="example of persistent helper text"
-                                        persistent-hint required></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Username*" hint="example of persistent helper text"
-                                        persistent-hint required></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field label="Email*" required></v-text-field>
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-text-field label="ID*" required></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6">
-                                    <v-text-field label="Role*" required></v-text-field>
+                                    <v-text-field label="Name*" hint="example of persistent helper text"
+                                        persistent-hint required></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-text-field label="Password*" type="password" required></v-text-field>
+                                    <v-text-field label="Value*" required></v-text-field>
                                 </v-col>
+                                
                                 
                             </v-row>
                         </v-container>
@@ -81,24 +72,21 @@ export default {
         itemsPerPage: 5,
         dialog: false,
         headers: [
+            { title: 'ID', key: 'id' },
             {
-                title: 'First Name',
+                title: 'Name',
                 align: 'start',
                 sortable: false,
                 //TODO Düzenlenecek
-                key: 'firstName',
+                key: 'name',
             },
             {
-                title: 'Last Name',
+                title: 'Value',
                 align: 'start',
                 sortable: false,
                 //TODO Düzenlenecek
-                key: 'lastName',
+                key: 'email',
             },
-            { title: 'Username', key: 'username' },
-            { title: 'Email', key: 'email' },
-            { title: 'Role', key: 'role' },
-            { title: 'Status', key: 'status' },
             { title: 'Actions', key: 'actions', sortable: false },
         ],
         items: [],
