@@ -1,7 +1,16 @@
 <template>
+    <v-container  class="bg-blue">
+        
+        <v-row class="pa-4 align-center" >
+            <div :class="['text-h4', 'pa-2']">App Config</div>
+            <v-spacer></v-spacer>
+            <v-btn class="bg-white" @click="dialog = true">Hello</v-btn>
+        </v-row>
+            
+        
+    </v-container>
     <v-data-table-server v-model:items-per-page="itemsPerPage" :headers="headers" :items-length="length" :items="items"
         :loading="loading" class="elevation-1" item-value="name" @update:options="loadItems">
-
         <template v-slot:tfoot?>
             <tr>
                 <td>
@@ -11,7 +20,7 @@
             </tr>
         </template>
         <template v-slot:item.actions="{ item }">
-            <v-icon size="small" class="me-2" @click="dialog = true">
+            <v-icon size="small" class="me-2" @click="editUser(item)">
                 mdi-pencil
             </v-icon>
             <v-icon size="small">
@@ -35,15 +44,15 @@
                         <v-container>
                             <v-row>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="First Name*" required></v-text-field>
+                                    <v-text-field v-model="user.firstName" label="First Name*" required value></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Last Name*" hint="example of persistent helper text"
+                                    <v-text-field v-model="user.lastName" label="Last Name*" hint="example of persistent helper text"
                                         persistent-hint required></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Username*" hint="example of persistent helper text"
-                                        persistent-hint required></v-text-field>
+                                    <v-text-field v-model="user.username" label="Username*" hint="example of persistent helper text" persistent-hint
+                                        required></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field label="Email*" required></v-text-field>
@@ -54,7 +63,7 @@
                                 <v-col cols="12">
                                     <v-text-field label="Password*" type="password" required></v-text-field>
                                 </v-col>
-                                
+
                             </v-row>
                         </v-container>
                         <small>*indicates required field</small>
@@ -64,7 +73,7 @@
                         <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
                             Close
                         </v-btn>
-                        <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
+                        <v-btn color="blue-darken-1" variant="text" @click="save">
                             Save
                         </v-btn>
                     </v-card-actions>
@@ -80,6 +89,11 @@ export default {
     data: () => ({
         itemsPerPage: 5,
         dialog: false,
+        user:{
+            firstName:"",
+            lastName:"",
+            username:""
+        },
         headers: [
             {
                 title: 'First Name',
@@ -113,6 +127,14 @@ export default {
             this.items = data;
             this.loading = false;
         },
+        async save(){
+            console.log(this.user);
+
+        },
+        async editUser(item){
+            this.user = item;
+            this.dialog = true;
+        }
     },
 }
 </script>
