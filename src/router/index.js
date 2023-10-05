@@ -17,7 +17,7 @@ const routes = [
       },
       {
         path: 'app-config',
-        component: () => import('@/views/AppConfig.vue'),
+        component: () => import('@/views/AppConfigList.vue'),
       },
       {
         path: 'labels',

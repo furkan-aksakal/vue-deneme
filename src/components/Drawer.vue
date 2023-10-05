@@ -4,9 +4,9 @@
       <v-navigation-drawer class="bg-dark" theme="dark" permanent>
         <v-list color="transparent">
           <v-img :width="295" aspect-ratio="16/9" cover src="@/assets/logo.png"></v-img>
-          <v-list-item prepend-icon="mdi-view-dashboard" title="User" @click="user(0)"></v-list-item>
+          <v-list-item prepend-icon="mdi-view-dashboard" title="Users" @click="user(0)"></v-list-item>
           <v-list-item prepend-icon="mdi-view-dashboard" title="i18n" @click="i18n(1)"></v-list-item>
-          <v-list-item prepend-icon="mdi-view-dashboard" title="AppConfig" @click="appconfig(2)"></v-list-item>
+          <v-list-item prepend-icon="mdi-view-dashboard" title="AppConfig List" @click="appconfig(2)"></v-list-item>
           <v-list-item prepend-icon="mdi-view-dashboard" title="Labels" @click="labels(3)"></v-list-item>
           <v-list-item prepend-icon="mdi-view-dashboard" title="Airports" @click="airport(4)"></v-list-item>
         </v-list>
