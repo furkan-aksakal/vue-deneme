@@ -4,16 +4,28 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    component: () => import('@/components/TabBar.vue'),
+    component: () => import('@/components/Drawer.vue'),
     children: [
       {
-        path: '',
+        path: 'users',
 
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/Users.vue'),
       },
       {
         path: 'i18n',
         component: () => import('@/views/i18n.vue'),
+      },
+      {
+        path: 'app-config',
+        component: () => import('@/views/AppConfig.vue'),
+      },
+      {
+        path: 'labels',
+        component: () => import('@/views/Labels.vue'),
+      },
+      {
+        path: 'airports',
+        component: () => import('@/views/Airports.vue'),
       },
     ],
   },
