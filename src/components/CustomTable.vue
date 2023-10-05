@@ -24,109 +24,44 @@
   import AxiosHelper from "../helper/axiosHelper"; 
   export default {
     data: () => ({
-      search:"",
-      dialog: false,
-      dialogDelete: false,
+      itemsPerPage: 5,
       headers: [
-      { title: 'ID', key: 'id' },
+        { title: 'ID', key: 'id' },
         {
-          title: 'Dessert (100g serving)',
+          title: 'İsim',
           align: 'start',
           sortable: false,
           key: 'name',
         },
-        
         { title: 'Mail Adresi', key: 'email' },
         { title: 'İçerik', key: 'body' },
-        { title: 'Protein (g)', key: 'protein' },
         { title: 'Actions', key: 'actions', sortable: false },
       ],
-      desserts: [
-        
-      ],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-      },
-      defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
-      },
+      serverItems: [],
+      loading: true,
+      totalItems: 0,
+      id: '',
+      calories: '',
+      search: '',
     }),
-
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
-    },
-
     watch: {
-      dialog (val) {
-        val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
-      },
+      id () {
+        this.search = String(Date.now())
+      }
     },
-
-    created () {
-      this.initialize()
-    },
-
     methods: {
-      async initialize () {
-        const response = await AxiosHelper.get("/comments");
-        const data = await response.data;
-        this.desserts = data;
-      },
+     loadItems () {
+        this.loading = true
+         AxiosHelper.get(`/users`).then(response => {
+          console.log(response.data);
+          this.serverItems =response.data;
+          this.loadItems = response.data.length;
+          this.loading = false;
+         }).catch(err => {
+          console.log("errr");
+         });
+        
 
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
-      },
-
-      deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
-        this.closeDelete()
-      },
-
-      close () {
-        this.dialog = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
-      closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
       },
     },
   }
